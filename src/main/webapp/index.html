@@ -71,7 +71,14 @@
 				// ignore
 			}
 		}
-		
+
+		urlParams = {
+			dev: 0,
+			// lang: 'zh',
+			od: 0,
+			db: 0,
+			gapi: 0,
+		}
 		// Global variable for desktop
 		var mxIsElectron = window && window.process && window.process.type;
 
@@ -263,6 +270,13 @@
 			}
 
 			mxForceIncludes = false;
+
+			if (location.hostname == 'localhost' || location.hostname == '127.0.0.1') {
+				drawDevUrl = `http://${location.host}/`;
+				geBasePath = `http://${location.host}/js/grapheditor`;
+				mxBasePath = `http://${location.host}/mxgraph`;
+				mxForceIncludes = true;
+			}
 
 			mxscript(drawDevUrl + 'js/PreConfig.js');
 			mxscript(drawDevUrl + 'js/diagramly/Init.js');
